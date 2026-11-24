@@ -1,0 +1,3250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StyleNest | Luxury Fashion & Lifestyle Store</title>
+
+  <!-- Google Fonts: Playfair Display (Editorial Serif) & Plus Jakarta Sans (Clean Modern Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 for Crisp Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       1. CSS VARIABLES & THEME TOKENS (BURGUNDY & CREAM SIGNATURE PALETTE)
+       ========================================================================== */
+    :root {
+      /* Signature Burgundy & Cream Palette */
+      --burgundy-deep: #4A0D1C;
+      --burgundy-primary: #6D1429;
+      --burgundy-light: #8E1F3A;
+      --burgundy-tint: #F3E6E9;
+
+      --cream-bg: #FAF6F0;
+      --cream-surface: #FFFDF9;
+      --cream-alt: #F2EBE1;
+      --cream-border: #E5D9CA;
+
+      --gold-accent: #C59B27;
+      --gold-soft: #F7EFD8;
+
+      --text-main: #231418;
+      --text-muted: #665257;
+      --text-on-dark: #FAF6F0;
+
+      /* Typography */
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      /* Elevations & Radius */
+      --shadow-sm: 0 4px 12px rgba(74, 13, 28, 0.05);
+      --shadow-md: 0 10px 28px rgba(74, 13, 28, 0.09);
+      --shadow-lg: 0 20px 44px rgba(74, 13, 28, 0.14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-pill: 999px;
+
+      --transition: all 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* CSS-Only Dark Mode Theme Overrides when #theme-toggle is checked */
+    #theme-toggle:checked ~ .site-wrapper {
+      --cream-bg: #160A0D;
+      --cream-surface: #221015;
+      --cream-alt: #2B151B;
+      --cream-border: #3E2028;
+      --burgundy-tint: #381820;
+      --text-main: #F8F1EA;
+      --text-muted: #C7B2B7;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.45);
+      --shadow-lg: 0 20px 44px rgba(0, 0, 0, 0.6);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-main);
+      background-color: var(--cream-bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .site-wrapper {
+      background-color: var(--cream-bg);
+      color: var(--text-main);
+      transition: background-color 0.35s ease, color 0.35s ease;
+      min-height: 100vh;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-padding {
+      padding: 5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.25rem;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--burgundy-primary);
+      background: var(--burgundy-tint);
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 0.85rem;
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .section-eyebrow {
+      color: #F4C4CE;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 3.8vw, 2.85rem);
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--text-main);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.94rem;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--burgundy-primary);
+      color: var(--text-on-dark);
+      box-shadow: 0 6px 18px rgba(109, 20, 41, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--burgundy-deep);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(74, 13, 28, 0.35);
+    }
+
+    .btn-cream {
+      background: var(--cream-bg);
+      color: var(--burgundy-deep);
+      font-weight: 700;
+    }
+
+    .btn-cream:hover {
+      background: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: var(--burgundy-primary);
+      color: var(--burgundy-primary);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .btn-outline {
+      border-color: #E79CAE;
+      color: #F8D5DD;
+    }
+
+    .btn-outline:hover {
+      background: var(--burgundy-primary);
+      color: var(--text-on-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      border-color: rgba(250, 246, 240, 0.65);
+      color: var(--text-on-dark);
+    }
+
+    .btn-outline-light:hover {
+      background: var(--cream-bg);
+      color: var(--burgundy-deep);
+      border-color: var(--cream-bg);
+    }
+
+    /* Hidden state checkboxes */
+    .sr-checkbox {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ==========================================================================
+       3. TOP ANNOUNCEMENT BAR
+       ========================================================================== */
+    .announcement-bar {
+      background: linear-gradient(90deg, var(--burgundy-deep), var(--burgundy-primary), var(--burgundy-deep));
+      color: var(--text-on-dark);
+      font-size: 0.84rem;
+      font-weight: 500;
+      padding: 0.65rem 1rem;
+      text-align: center;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid rgba(197, 155, 39, 0.3);
+    }
+
+    .announcement-bar .promo-code {
+      display: inline-block;
+      background: var(--gold-accent);
+      color: #1E070C;
+      font-weight: 700;
+      padding: 0.12rem 0.6rem;
+      border-radius: 4px;
+      margin-left: 0.35rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ==========================================================================
+       4. STICKY NAVIGATION BAR (WITH CSS HAMBURGER & THEME SWITCH)
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 253, 249, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--cream-border);
+      transition: var(--transition);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .navbar {
+      background: rgba(22, 10, 13, 0.94);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      height: 78px;
+    }
+
+    /* Brand Logo */
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.72rem;
+      color: var(--burgundy-deep);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .brand-logo {
+      color: #FAF6F0;
+    }
+
+    .brand-emblem {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(145deg, var(--burgundy-deep) 0%, var(--burgundy-primary) 100%);
+      color: #F3D382;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--gold-accent);
+      box-shadow: 0 4px 14px rgba(74, 13, 28, 0.22);
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .brand-logo:hover .brand-emblem {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 6px 18px rgba(197, 155, 39, 0.32);
+    }
+
+    .brand-emblem svg {
+      width: 26px;
+      height: 26px;
+      display: block;
+    }
+
+    .brand-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.68rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-name em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--burgundy-primary);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .brand-name em {
+      color: #F3D382;
+    }
+
+    .brand-tagline {
+      font-family: var(--font-body);
+      font-size: 0.56rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold-accent);
+      margin-top: 3px;
+    }
+
+    /* Primary Nav Links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.65rem;
+    }
+
+    .nav-links a {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      position: relative;
+      padding: 0.35rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--burgundy-primary);
+      transition: width 0.28s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--burgundy-primary);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .nav-links a:hover {
+      color: #F4B8C6;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Search Bar */
+    .nav-search {
+      display: flex;
+      align-items: center;
+      background: var(--cream-alt);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-pill);
+      padding: 0.42rem 1rem;
+      width: 220px;
+      transition: var(--transition);
+    }
+
+    .nav-search:focus-within {
+      border-color: var(--burgundy-primary);
+      width: 255px;
+      box-shadow: 0 0 0 3px rgba(109, 20, 41, 0.12);
+    }
+
+    .nav-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      color: var(--text-main);
+      font-family: var(--font-body);
+      font-size: 0.86rem;
+      width: 100%;
+      padding-left: 0.5rem;
+    }
+
+    .nav-search i {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Action Icons */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream-alt);
+      color: var(--text-main);
+      border: 1px solid var(--cream-border);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .icon-btn:hover {
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      border-color: var(--burgundy-primary);
+      transform: translateY(-2px);
+    }
+
+    .cart-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      padding: 0.55rem 1.05rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .cart-pill:hover {
+      background: var(--burgundy-deep);
+      transform: translateY(-2px);
+    }
+
+    /* Theme Toggle Visual Switch */
+    .theme-label .fa-sun { display: none; }
+    #theme-toggle:checked ~ .site-wrapper .theme-label .fa-moon { display: none; }
+    #theme-toggle:checked ~ .site-wrapper .theme-label .fa-sun { display: inline-block; color: var(--gold-accent); }
+
+    /* Mobile Hamburger Button */
+    .hamburger-btn {
+      display: none;
+      font-size: 1.35rem;
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    /* ==========================================================================
+       5. HERO / PROMOTIONAL BANNER SECTION
+       ========================================================================== */
+    .hero {
+      background: linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy-primary) 58%, #3B0915 100%);
+      color: var(--text-on-dark);
+      position: relative;
+      overflow: hidden;
+      padding: 4.5rem 0 5.5rem;
+    }
+
+    /* Subtle ornamental radial glow */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(250, 246, 240, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(250, 246, 240, 0.14);
+      border: 1px solid rgba(250, 246, 240, 0.3);
+      backdrop-filter: blur(8px);
+      padding: 0.45rem 1.15rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #FBE9B7;
+      margin-bottom: 1.35rem;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(197, 155, 39, 0.35); }
+      50% { box-shadow: 0 0 0 8px rgba(197, 155, 39, 0); }
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.6rem, 5vw, 4.25rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      color: #FAF6F0;
+    }
+
+    .hero-title span {
+      font-style: italic;
+      color: #F3D382;
+    }
+
+    .hero-desc {
+      font-size: 1.08rem;
+      color: rgba(250, 246, 240, 0.86);
+      max-width: 560px;
+      margin-bottom: 2.15rem;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(250, 246, 240, 0.18);
+    }
+
+    .stat-item h4 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      color: #F3D382;
+    }
+
+    .stat-item p {
+      font-size: 0.84rem;
+      color: rgba(250, 246, 240, 0.78);
+    }
+
+    /* Hero Editorial Image Frame */
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-image-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 6px solid rgba(250, 246, 240, 0.18);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .hero-image-card img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .hero-image-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .hero-floating-tag {
+      position: absolute;
+      bottom: 1.5rem;
+      left: -1.5rem;
+      background: var(--cream-surface);
+      color: var(--text-main);
+      padding: 1rem 1.35rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      border: 1px solid var(--cream-border);
+    }
+
+    .floating-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--burgundy-tint);
+      color: var(--burgundy-primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.15rem;
+    }
+
+    /* ==========================================================================
+       6. TRENDING SEARCHES BAR (OPTIONAL CREATIVE FEATURE)
+       ========================================================================== */
+    .trending-bar {
+      background: var(--cream-surface);
+      border-bottom: 1px solid var(--cream-border);
+      padding: 1.1rem 0;
+    }
+
+    .trending-inner {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .trending-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--burgundy-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-right: 0.5rem;
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .trending-label {
+      color: #F4B8C6;
+    }
+
+    .trend-tag {
+      font-size: 0.82rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--cream-alt);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-pill);
+      color: var(--text-muted);
+    }
+
+    .trend-tag:hover {
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      border-color: var(--burgundy-primary);
+    }
+
+    /* ==========================================================================
+       7. SHOP BY CATEGORY SECTION (6 RESPONSIVE CARDS)
+       ========================================================================== */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .category-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 360px;
+      box-shadow: var(--shadow-md);
+      background: var(--burgundy-deep);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .category-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      opacity: 0.88;
+    }
+
+    .category-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(45, 7, 16, 0.92) 10%, rgba(74, 13, 28, 0.35) 60%, transparent 100%);
+    }
+
+    .category-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .category-content {
+      position: relative;
+      z-index: 2;
+      padding: 1.75rem;
+      color: #FAF6F0;
+      transform: translateY(8px);
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-content {
+      transform: translateY(0);
+    }
+
+    .category-content h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .category-content p {
+      font-size: 0.88rem;
+      color: rgba(250, 246, 240, 0.82);
+      margin-bottom: 1.1rem;
+    }
+
+    .category-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--cream-bg);
+      color: var(--burgundy-deep);
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .category-card:hover .category-btn {
+      background: var(--gold-accent);
+      color: #1B060B;
+    }
+
+    /* ==========================================================================
+       8. FEATURED PRODUCTS SECTION (WITH CSS-ONLY CATEGORY FILTER TABS)
+       ========================================================================== */
+    .featured-section {
+      background: var(--cream-alt);
+    }
+
+    /* CSS Radio Filter Tabs */
+    .filter-controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .filter-tab {
+      padding: 0.55rem 1.35rem;
+      border-radius: var(--radius-pill);
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-main);
+      transition: var(--transition);
+    }
+
+    .filter-tab:hover {
+      border-color: var(--burgundy-primary);
+    }
+
+    /* Active Radio States */
+    #cat-all:checked ~ .site-wrapper label[for="cat-all"],
+    #cat-men:checked ~ .site-wrapper label[for="cat-men"],
+    #cat-women:checked ~ .site-wrapper label[for="cat-women"],
+    #cat-shoes:checked ~ .site-wrapper label[for="cat-shoes"],
+    #cat-accessories:checked ~ .site-wrapper label[for="cat-accessories"] {
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      border-color: var(--burgundy-primary);
+      box-shadow: 0 6px 16px rgba(109, 20, 41, 0.25);
+    }
+
+    /* Pure CSS Product Filtering Logic */
+    #cat-men:checked ~ .site-wrapper .products-grid .product-card:not([data-category="men"]),
+    #cat-women:checked ~ .site-wrapper .products-grid .product-card:not([data-category="women"]),
+    #cat-shoes:checked ~ .site-wrapper .products-grid .product-card:not([data-category="shoes"]),
+    #cat-accessories:checked ~ .site-wrapper .products-grid .product-card:not([data-category="accessories"]) {
+      display: none;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.75rem;
+    }
+
+    .product-card {
+      background: var(--cream-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--cream-border);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: rgba(109, 20, 41, 0.35);
+    }
+
+    .product-media {
+      position: relative;
+      height: 270px;
+      overflow: hidden;
+      background: var(--cream-alt);
+    }
+
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+
+    .product-card:hover .product-media img {
+      transform: scale(1.07);
+    }
+
+    /* Badges */
+    .product-badge {
+      position: absolute;
+      top: 0.9rem;
+      left: 0.9rem;
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.03em;
+      z-index: 2;
+    }
+
+    .badge-gold {
+      background: var(--gold-accent);
+      color: #1D060B;
+    }
+
+    /* Interactive CSS Wishlist Toggle */
+    .wishlist-toggle {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 253, 249, 0.92);
+      color: var(--burgundy-primary);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      z-index: 3;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+      transition: var(--transition);
+    }
+
+    .wishlist-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .wish-input:checked + .wishlist-toggle {
+      background: var(--burgundy-primary);
+      color: #FAF6F0;
+    }
+
+    .wish-input:checked + .wishlist-toggle i {
+      font-weight: 900;
+    }
+
+    /* Quick View Hover Overlay */
+    .quick-view-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(45, 7, 16, 0.42);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .product-card:hover .quick-view-overlay {
+      opacity: 1;
+    }
+
+    .quick-view-btn {
+      background: var(--cream-bg);
+      color: var(--burgundy-deep);
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      transform: translateY(12px);
+      transition: var(--transition);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .product-card:hover .quick-view-btn {
+      transform: translateY(0);
+    }
+
+    .quick-view-btn:hover {
+      background: var(--gold-accent);
+      color: #1D060B;
+    }
+
+    /* Product Details */
+    .product-body {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.8rem;
+      color: var(--gold-accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .product-rating span {
+      color: var(--text-muted);
+      margin-left: 0.25rem;
+    }
+
+    .product-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .product-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-current {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--burgundy-primary);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .price-current {
+      color: #F4B8C6;
+    }
+
+    .price-original {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .btn-add-cart {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+    }
+
+    /* ==========================================================================
+       9. SPECIAL OFFERS / DEALS OF THE DAY SECTION
+       ========================================================================== */
+    .deals-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .countdown-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--burgundy-deep);
+      color: var(--cream-bg);
+      padding: 0.75rem 1.35rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gold-accent);
+    }
+
+    .countdown-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #F3D382;
+      font-weight: 700;
+    }
+
+    .timer-digits {
+      display: flex;
+      gap: 0.45rem;
+    }
+
+    .time-unit {
+      background: rgba(250, 246, 240, 0.12);
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+    }
+
+    .deal-card {
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 290px;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .deal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .deal-burgundy {
+      background: linear-gradient(135deg, var(--burgundy-deep), var(--burgundy-primary));
+      color: var(--cream-bg);
+    }
+
+    .deal-cream {
+      background: linear-gradient(135deg, #F5ECE0, #EADBC8);
+      color: #231418;
+      border: 1px solid #D9C4AA;
+    }
+
+    .deal-gold-dark {
+      background: linear-gradient(135deg, #3A0A16, #5E1224);
+      color: var(--cream-bg);
+      border: 1px solid var(--gold-accent);
+    }
+
+    .deal-tag {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--gold-accent);
+      color: #1D060B;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.32rem 0.85rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1rem;
+    }
+
+    .deal-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+
+    .deal-card p {
+      font-size: 0.92rem;
+      opacity: 0.88;
+      margin-bottom: 1.5rem;
+    }
+
+    .deal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .urgency-note {
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ==========================================================================
+       10. NEW ARRIVALS SECTION (HORIZONTAL SCROLL ON DESKTOP, GRID ON MOBILE)
+       ========================================================================== */
+    .new-arrivals-section {
+      background: var(--cream-surface);
+      border-top: 1px solid var(--cream-border);
+      border-bottom: 1px solid var(--cream-border);
+    }
+
+    .arrivals-track {
+      display: flex;
+      gap: 1.75rem;
+      overflow-x: auto;
+      padding-bottom: 1.25rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--burgundy-primary) var(--cream-alt);
+    }
+
+    .arrivals-track::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .arrivals-track::-webkit-scrollbar-track {
+      background: var(--cream-alt);
+      border-radius: 99px;
+    }
+
+    .arrivals-track::-webkit-scrollbar-thumb {
+      background: var(--burgundy-primary);
+      border-radius: 99px;
+    }
+
+    .arrival-card {
+      flex: 0 0 305px;
+      scroll-snap-align: start;
+      background: var(--cream-bg);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .arrival-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .arrival-media {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .arrival-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .arrival-card:hover .arrival-media img {
+      transform: scale(1.06);
+    }
+
+    /* ==========================================================================
+       11. WHY SHOP WITH STYLENEST (4 BENEFIT CARDS)
+       ========================================================================== */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .benefit-card {
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--burgundy-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .benefit-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.25rem;
+      border-radius: 18px;
+      background: var(--burgundy-tint);
+      color: var(--burgundy-primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .benefit-card:hover .benefit-icon {
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      transform: rotate(-4deg) scale(1.06);
+    }
+
+    .benefit-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.22rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .benefit-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       12. CUSTOMER REVIEWS SECTION
+       ========================================================================== */
+    .reviews-section {
+      background: var(--cream-alt);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .quote-mark {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.35rem;
+      font-size: 1.85rem;
+      color: var(--burgundy-tint);
+    }
+
+    .review-stars {
+      color: var(--gold-accent);
+      font-size: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--text-main);
+      font-style: italic;
+      margin-bottom: 1.35rem;
+      line-height: 1.65;
+    }
+
+    .reviewer-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--cream-border);
+    }
+
+    .reviewer-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--burgundy-primary);
+      color: var(--cream-bg);
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      font-size: 0.92rem;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .reviewer-info h4 {
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .reviewer-info span {
+      font-size: 0.78rem;
+      color: var(--burgundy-primary);
+      font-weight: 600;
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .reviewer-info span {
+      color: #F4B8C6;
+    }
+
+    /* ==========================================================================
+       13. GIFT CARD & RECENTLY VIEWED CREATIVE SHOWCASE
+       ========================================================================== */
+    .gift-banner {
+      background: linear-gradient(120deg, var(--burgundy-deep), var(--burgundy-primary));
+      border-radius: var(--radius-lg);
+      padding: 3rem;
+      color: var(--cream-bg);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 2.5rem;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 4.5rem;
+    }
+
+    .gift-banner h3 {
+      font-family: var(--font-heading);
+      font-size: 2.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .gift-banner p {
+      color: rgba(250, 246, 240, 0.85);
+      margin-bottom: 1.5rem;
+    }
+
+    .virtual-card {
+      background: linear-gradient(135deg, #2B0610, #7B1830);
+      border: 1px solid var(--gold-accent);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+      position: relative;
+    }
+
+    .virtual-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .virtual-card-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #F3D382;
+    }
+
+    .virtual-card-brand svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .virtual-card-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .recently-viewed-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      background: var(--cream-surface);
+      border: 1px solid var(--cream-border);
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      transition: var(--transition);
+    }
+
+    .recent-item:hover {
+      border-color: var(--burgundy-primary);
+      transform: translateY(-2px);
+    }
+
+    .recent-item img {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-sm);
+    }
+
+    .recent-item h5 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .recent-item span {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--burgundy-primary);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .recent-item span {
+      color: #F4B8C6;
+    }
+
+    /* ==========================================================================
+       14. SHOPPING CART PREVIEW SECTION (WITH FREE SHIPPING PROGRESS BAR)
+       ========================================================================== */
+    .cart-section {
+      background: var(--cream-surface);
+      border-top: 1px solid var(--cream-border);
+    }
+
+    .shipping-progress-card {
+      background: var(--burgundy-tint);
+      border: 1px solid rgba(109, 20, 41, 0.2);
+      border-radius: var(--radius-md);
+      padding: 1.15rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .shipping-progress-text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+      color: var(--burgundy-deep);
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .shipping-progress-text {
+      color: #FAF6F0;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: rgba(109, 20, 41, 0.15);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--burgundy-primary), var(--gold-accent));
+      border-radius: var(--radius-pill);
+    }
+
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1.45fr 0.85fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .cart-items-box {
+      background: var(--cream-bg);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--cream-border);
+    }
+
+    .cart-item:first-child {
+      padding-top: 0;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex: 1;
+    }
+
+    .cart-item-info img {
+      width: 78px;
+      height: 88px;
+      border-radius: var(--radius-sm);
+    }
+
+    .cart-item-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .cart-item-variant {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .qty-selector {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--cream-border);
+      background: var(--cream-surface);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .qty-btn {
+      padding: 0.35rem 0.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .qty-btn:hover {
+      background: var(--burgundy-tint);
+    }
+
+    .qty-val {
+      padding: 0 0.65rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .cart-item-price {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--burgundy-primary);
+      min-width: 80px;
+      text-align: right;
+    }
+
+    #theme-toggle:checked ~ .site-wrapper .cart-item-price {
+      color: #F4B8C6;
+    }
+
+    .remove-btn {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding: 0.45rem;
+      border-radius: 50%;
+    }
+
+    .remove-btn:hover {
+      color: #C92A2A;
+      background: rgba(201, 42, 42, 0.1);
+    }
+
+    /* Order Summary Box */
+    .cart-summary-box {
+      background: var(--cream-bg);
+      border: 1px solid var(--cream-border);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cart-summary-box h3 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--cream-border);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+      font-size: 0.94rem;
+      color: var(--text-muted);
+    }
+
+    .summary-row.discount {
+      color: #1E7E34;
+      font-weight: 600;
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.15rem;
+      padding-top: 1.15rem;
+      border-top: 2px solid var(--cream-border);
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    /* ==========================================================================
+       15. NEWSLETTER SECTION
+       ========================================================================== */
+    .newsletter-section {
+      padding: 4.5rem 0;
+    }
+
+    .newsletter-box {
+      background: linear-gradient(135deg, var(--burgundy-primary), var(--burgundy-deep));
+      color: var(--cream-bg);
+      border-radius: var(--radius-lg);
+      padding: 3.75rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .newsletter-box h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.9rem, 3.5vw, 2.65rem);
+      margin-bottom: 0.85rem;
+    }
+
+    .newsletter-box p {
+      max-width: 580px;
+      margin: 0 auto 2rem;
+      color: rgba(250, 246, 240, 0.86);
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 520px;
+      margin: 0 auto 1rem;
+      background: var(--cream-bg);
+      padding: 0.4rem;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 0.75rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: 0.94rem;
+      color: #231418;
+      outline: none;
+    }
+
+    .newsletter-note {
+      font-size: 0.84rem;
+      color: #F3D382;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       16. FOOTER SECTION
+       ========================================================================== */
+    .footer {
+      background: #22060D;
+      color: #EAE0D5;
+      padding-top: 4.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 2.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(250, 246, 240, 0.12);
+    }
+
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: #FAF6F0;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .footer-brand .brand-name em {
+      color: #F3D382;
+    }
+
+    .footer-about {
+      font-size: 0.9rem;
+      color: rgba(234, 224, 213, 0.78);
+      margin-bottom: 1.5rem;
+      max-width: 320px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(250, 246, 240, 0.08);
+      display: grid;
+      place-items: center;
+      color: #FAF6F0;
+      border: 1px solid rgba(250, 246, 240, 0.15);
+    }
+
+    .social-link:hover {
+      background: var(--gold-accent);
+      color: #1D060B;
+      transform: translateY(-3px);
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-heading);
+      font-size: 1.18rem;
+      color: #FAF6F0;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.68rem;
+    }
+
+    .footer-links a {
+      font-size: 0.9rem;
+      color: rgba(234, 224, 213, 0.78);
+    }
+
+    .footer-links a:hover {
+      color: #F3D382;
+      padding-left: 4px;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.9rem;
+      color: rgba(234, 224, 213, 0.82);
+    }
+
+    .contact-list i {
+      color: var(--gold-accent);
+      margin-top: 0.25rem;
+    }
+
+    .footer-bottom {
+      padding: 1.65rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.86rem;
+      color: rgba(234, 224, 213, 0.7);
+    }
+
+    .back-to-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(250, 246, 240, 0.1);
+      color: #FAF6F0;
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+    }
+
+    .back-to-top:hover {
+      background: var(--burgundy-primary);
+    }
+
+    /* Sticky Mobile Bottom Action Bar */
+    .mobile-sticky-bar {
+      display: none;
+    }
+
+    /* ==========================================================================
+       17. RESPONSIVE MEDIA QUERIES (TABLET & MOBILE)
+       ========================================================================== */
+    @media (max-width: 1120px) {
+      .nav-search {
+        display: none;
+      }
+      .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .benefits-grid,
+      .reviews-grid,
+      .recently-viewed-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      /* CSS-only Hamburger Navigation */
+      .hamburger-btn {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        right: 0;
+        background: var(--cream-surface);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+        border-bottom: 1px solid var(--cream-border);
+        box-shadow: var(--shadow-lg);
+        display: none;
+      }
+
+      #nav-toggle:checked ~ .site-wrapper .nav-links {
+        display: flex;
+      }
+
+      .hero-grid,
+      .gift-banner,
+      .cart-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-floating-tag {
+        left: 1rem;
+        bottom: 1rem;
+      }
+
+      .categories-grid,
+      .deals-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-padding {
+        padding: 3.5rem 0;
+      }
+
+      .categories-grid,
+      .products-grid,
+      .deals-grid,
+      .benefits-grid,
+      .reviews-grid,
+      .recently-viewed-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Mobile Grid Layout for New Arrivals */
+      .arrivals-track {
+        display: grid;
+        grid-template-columns: 1fr;
+        overflow-x: visible;
+      }
+
+      .arrival-card {
+        flex: none;
+        width: 100%;
+      }
+
+      .hero-image-card img {
+        height: 360px;
+      }
+
+      .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cart-item-price {
+        text-align: left;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+        border-radius: var(--radius-md);
+        gap: 0.5rem;
+      }
+
+      /* Sticky Mobile Bar */
+      .mobile-sticky-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+        background: var(--burgundy-deep);
+        color: var(--cream-bg);
+        padding: 0.75rem 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--gold-accent);
+        box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.25);
+      }
+
+      .footer {
+        padding-bottom: 4.5rem;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- CSS-Only Interactive State Checkboxes -->
+  <input type="checkbox" id="theme-toggle" class="sr-checkbox" aria-label="Toggle Dark Mode" />
+  <input type="checkbox" id="nav-toggle" class="sr-checkbox" aria-label="Toggle Navigation Menu" />
+
+  <!-- CSS-Only Product Filter Radio Inputs -->
+  <input type="radio" name="product-filter" id="cat-all" class="sr-checkbox" checked />
+  <input type="radio" name="product-filter" id="cat-men" class="sr-checkbox" />
+  <input type="radio" name="product-filter" id="cat-women" class="sr-checkbox" />
+  <input type="radio" name="product-filter" id="cat-shoes" class="sr-checkbox" />
+  <input type="radio" name="product-filter" id="cat-accessories" class="sr-checkbox" />
+
+  <div class="site-wrapper">
+
+    <!-- ========================================================================
+         1. TOP ANNOUNCEMENT BAR
+         ======================================================================== -->
+    <div class="announcement-bar">
+      Free Shipping on Orders Above ₹999 &nbsp;|&nbsp; Extra 10% Off for New Users &nbsp;|&nbsp; Use Code:
+      <span class="promo-code">STYLE10</span>
+    </div>
+
+    <!-- ========================================================================
+         2. STICKY NAVIGATION BAR
+         ======================================================================== -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <!-- Brand Logo -->
+        <a href="#top" class="brand-logo" aria-label="StyleNest Home">
+          <span class="brand-emblem">
+            <!-- Bespoke Geometric SN Atelier Monogram SVG -->
+            <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2.5" y="2.5" width="31" height="31" rx="7" stroke="currentColor" stroke-width="1.2" stroke-opacity="0.55"/>
+              <path d="M18 5.5L20.5 8L18 10.5L15.5 8L18 5.5Z" fill="currentColor"/>
+              <path d="M12.2 25.5V12.5L23.8 25.5V12.5" stroke="#FAF6F0" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.5 16.5C10.5 13.8 13.8 12.2 18 12.2C22.2 12.2 25.5 13.8 25.5 16.2C25.5 19.5 10.5 18.5 10.5 22.2C10.5 24.6 13.8 26 18 26C22.2 26 25.5 24.4 25.5 21.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="brand-wordmark">
+            <span class="brand-name">Style<em>Nest</em></span>
+            <span class="brand-tagline">Atelier &amp; Living</span>
+          </span>
+        </a>
+
+        <!-- Navigation Links -->
+        <nav aria-label="Primary Navigation">
+          <ul class="nav-links">
+            <li><a href="#top">Home</a></li>
+            <li><a href="#featured">Shop</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#offers">Offers</a></li>
+            <li><a href="#new-arrivals">New Arrivals</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Search Bar -->
+        <form class="nav-search" action="#featured" role="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" placeholder="Search luxury styles..." aria-label="Search products" />
+        </form>
+
+        <!-- Right Utility Actions -->
+        <div class="nav-actions">
+          <!-- Dark / Light Mode Toggle -->
+          <label for="theme-toggle" class="icon-btn theme-label" title="Switch Light/Dark Theme">
+            <i class="fa-solid fa-moon"></i>
+            <i class="fa-solid fa-sun"></i>
+          </label>
+
+          <a href="#featured" class="icon-btn" title="Wishlist" aria-label="Wishlist">
+            <i class="fa-regular fa-heart"></i>
+          </a>
+
+          <a href="#contact" class="icon-btn" title="User Account" aria-label="User Account">
+            <i class="fa-regular fa-user"></i>
+          </a>
+
+          <a href="#cart" class="cart-pill" aria-label="Shopping Cart">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Cart (3)</span>
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <label for="nav-toggle" class="hamburger-btn" aria-label="Open Menu">
+            <i class="fa-solid fa-bars"></i>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+         3. HERO / PROMOTIONAL BANNER SECTION
+         ======================================================================== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <i class="fa-solid fa-sparkles"></i>
+            AUTUMN / WINTER CURATION &bull; UP TO 50% OFF
+          </div>
+
+          <h1 class="hero-title">
+            New Season. <span>New Style.</span> New You.
+          </h1>
+
+          <p class="hero-desc">
+            Discover timeless silhouettes, tailored outerwear, and handcrafted lifestyle essentials crafted in rich textures and warm palettes for effortless everyday elegance.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#featured" class="btn btn-cream">
+              Shop Now <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#categories" class="btn btn-outline-light">
+              Explore Collection
+            </a>
+            <a href="#offers" class="btn btn-outline-light">
+              View Offers
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h4>12K+</h4>
+              <p>Curated Pieces</p>
+            </div>
+            <div class="stat-item">
+              <h4>98.6%</h4>
+              <p>Verified Satisfaction</p>
+            </div>
+            <div class="stat-item">
+              <h4>48 Hrs</h4>
+              <p>Express Dispatch</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-image-card">
+            <img
+              src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=950&q=80"
+              alt="Editorial fashion model showcasing StyleNest Autumn Collection"
+              onerror="this.src='https://placehold.co/800x950/6D1429/FAF6F0?text=StyleNest+Collection'"
+            />
+          </div>
+
+          <div class="hero-floating-tag">
+            <div class="floating-icon">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 0.92rem;">Velvet &amp; Silk Edit</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Limited Edition Run</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         OPTIONAL CREATIVE FEATURE: TRENDING SEARCHES BAR
+         ======================================================================== -->
+    <div class="trending-bar">
+      <div class="container trending-inner">
+        <span class="trending-label">
+          <i class="fa-solid fa-fire-flame-curved"></i> Trending Searches:
+        </span>
+        <a href="#featured" class="trend-tag">Burgundy Trench Coat</a>
+        <a href="#featured" class="trend-tag">Italian Leather Tote</a>
+        <a href="#featured" class="trend-tag">Chronograph Watch</a>
+        <a href="#featured" class="trend-tag">Suede Loafers</a>
+        <a href="#featured" class="trend-tag">Oud Eau de Parfum</a>
+        <a href="#featured" class="trend-tag">Aviator Sunglasses</a>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         4. SHOP BY CATEGORY SECTION (6 RESPONSIVE CARDS)
+         ======================================================================== -->
+    <section id="categories" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Curated Departments</span>
+          <h2 class="section-title">Shop by Category</h2>
+          <p class="section-subtitle">
+            Explore thoughtfully organized wardrobes and lifestyle accessories tailored to elevate every occasion.
+          </p>
+        </div>
+
+        <div class="categories-grid">
+          <!-- Category 1 -->
+          <article class="category-card">
+            <img
+              src="https://images.unsplash.com/photo-1617137968427-85924c800a22?auto=format&fit=crop&w=700&q=80"
+              alt="Men's Fashion"
+              onerror="this.src='https://placehold.co/600x700/4A0D1C/FAF6F0?text=Mens+Fashion'"
+            />
+            <div class="category-content">
+              <h3>Men’s Fashion</h3>
+              <p>Sharp tailoring, structured jackets &amp; breathable cotton staples.</p>
+              <a href="#featured" class="category-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- Category 2 -->
+          <article class="category-card">
+            <img
+              src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=700&q=80"
+              alt="Women's Fashion"
+              onerror="this.src='https://placehold.co/600x700/6D1429/FAF6F0?text=Womens+Fashion'"
+            />
+            <div class="category-content">
+              <h3>Women’s Fashion</h3>
+              <p>Flowing evening silhouettes, silk blouses &amp; modern knitwear.</p>
+              <a href="#featured" class="category-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- Category 3 -->
+          <article class="category-card">
+            <img
+              src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=700&q=80"
+              alt="Footwear"
+              onerror="this.src='https://placehold.co/600x700/4A0D1C/FAF6F0?text=Footwear'"
+            />
+            <div class="category-content">
+              <h3>Footwear</h3>
+              <p>Hand-finished leather loafers, sculpted heels &amp; urban sneakers.</p>
+              <a href="#featured" class="category-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- Category 4 -->
+          <article class="category-card">
+            <img
+              src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80"
+              alt="Watches and Accessories"
+              onerror="this.src='https://placehold.co/600x700/6D1429/FAF6F0?text=Watches+Accessories'"
+            />
+            <div class="category-content">
+              <h3>Watches &amp; Accessories</h3>
+              <p>Minimalist timepieces, polarized eyewear &amp; statement accents.</p>
+              <a href="#featured" class="category-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- Category 5 -->
+          <article class="category-card">
+            <img
+              src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
+              alt="Bags and Wallets"
+              onerror="this.src='https://placehold.co/600x700/4A0D1C/FAF6F0?text=Bags+Wallets'"
+            />
+            <div class="category-content">
+              <h3>Bags &amp; Wallets</h3>
+              <p>Full-grain leather totes, crossbody satchels &amp; cardholders.</p>
+              <a href="#featured" class="category-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <!-- Category 6 -->
+          <article class="category-card">
+            <img
+              src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80"
+              alt="Beauty and Grooming"
+              onerror="this.src='https://placehold.co/600x700/6D1429/FAF6F0?text=Beauty+Grooming'"
+            />
+            <div class="category-content">
+              <h3>Beauty &amp; Grooming</h3>
+              <p>Artisanal fragrances, botanical skincare &amp; grooming rituals.</p>
+              <a href="#featured" class="category-btn">Explore Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. FEATURED PRODUCTS SECTION (8 CARDS + PURE CSS FILTER TAGS)
+         ======================================================================== -->
+    <section id="featured" class="section-padding featured-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Editor's Selection</span>
+          <h2 class="section-title">Trending Now</h2>
+          <p class="section-subtitle">
+            Filter our most-coveted wardrobe staples and signature lifestyle pieces by category.
+          </p>
+        </div>
+
+        <!-- Pure CSS Interactive Filter Tags -->
+        <div class="filter-controls" role="tablist" aria-label="Filter products by category">
+          <label for="cat-all" class="filter-tab">All Products</label>
+          <label for="cat-men" class="filter-tab">Men</label>
+          <label for="cat-women" class="filter-tab">Women</label>
+          <label for="cat-shoes" class="filter-tab">Shoes</label>
+          <label for="cat-accessories" class="filter-tab">Watches &amp; Accessories</label>
+        </div>
+
+        <div class="products-grid">
+          <!-- Product 1: Casual Cotton T-Shirt -->
+          <article class="product-card" data-category="men">
+            <div class="product-media">
+              <span class="product-badge">20% Off</span>
+              <input type="checkbox" id="wish-1" class="sr-checkbox wish-input" />
+              <label for="wish-1" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80"
+                alt="Casual Cotton T-Shirt"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Cotton+T-Shirt'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span>(4.8)</span>
+              </div>
+              <h3 class="product-title">Casual Cotton T-Shirt</h3>
+              <p class="product-desc">240 GSM combed Supima organic cotton with tailored relaxed drape.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹1,199</span>
+                <span class="price-original">₹1,499</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 2: Denim Jacket -->
+          <article class="product-card" data-category="men">
+            <div class="product-media">
+              <span class="product-badge badge-gold">Best Seller</span>
+              <input type="checkbox" id="wish-2" class="sr-checkbox wish-input" checked />
+              <label for="wish-2" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80"
+                alt="Denim Jacket"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Denim+Jacket'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span>(4.9)</span>
+              </div>
+              <h3 class="product-title">Denim Jacket</h3>
+              <p class="product-desc">Vintage washed selvedge denim with antique brass shank buttons.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹2,999</span>
+                <span class="price-original">₹3,999</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 3: Running Shoes -->
+          <article class="product-card" data-category="shoes">
+            <div class="product-media">
+              <span class="product-badge">25% Off</span>
+              <input type="checkbox" id="wish-3" class="sr-checkbox wish-input" />
+              <label for="wish-3" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80"
+                alt="Running Shoes"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Running+Shoes'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span>(4.7)</span>
+              </div>
+              <h3 class="product-title">Running Shoes</h3>
+              <p class="product-desc">Featherweight knit upper with responsive dual-density cushioning.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹3,299</span>
+                <span class="price-original">₹4,399</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 4: Leather Handbag -->
+          <article class="product-card" data-category="women">
+            <div class="product-media">
+              <span class="product-badge badge-gold">Best Seller</span>
+              <input type="checkbox" id="wish-4" class="sr-checkbox wish-input" />
+              <label for="wish-4" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80"
+                alt="Leather Handbag"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Leather+Handbag'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span>(5.0)</span>
+              </div>
+              <h3 class="product-title">Leather Handbag</h3>
+              <p class="product-desc">Structured pebbled calfskin tote with gold-tone clasp &amp; suede lining.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹4,499</span>
+                <span class="price-original">₹5,999</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 5: Smart Watch -->
+          <article class="product-card" data-category="accessories">
+            <div class="product-media">
+              <span class="product-badge">30% Off</span>
+              <input type="checkbox" id="wish-5" class="sr-checkbox wish-input" />
+              <label for="wish-5" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+                alt="Smart Watch"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Smart+Watch'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span>(4.8)</span>
+              </div>
+              <h3 class="product-title">Smart Watch</h3>
+              <p class="product-desc">AMOLED sapphire display, stainless bezel &amp; 10-day battery endurance.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹4,899</span>
+                <span class="price-original">₹6,999</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 6: Wireless Earbuds -->
+          <article class="product-card" data-category="accessories">
+            <div class="product-media">
+              <span class="product-badge">15% Off</span>
+              <input type="checkbox" id="wish-6" class="sr-checkbox wish-input" />
+              <label for="wish-6" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80"
+                alt="Wireless Earbuds"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Wireless+Earbuds'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+                <span>(4.5)</span>
+              </div>
+              <h3 class="product-title">Wireless Earbuds</h3>
+              <p class="product-desc">Active noise cancellation with spatial studio acoustics &amp; matte case.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹2,499</span>
+                <span class="price-original">₹2,999</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 7: Sunglasses -->
+          <article class="product-card" data-category="accessories">
+            <div class="product-media">
+              <span class="product-badge badge-gold">Best Seller</span>
+              <input type="checkbox" id="wish-7" class="sr-checkbox wish-input" />
+              <label for="wish-7" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80"
+                alt="Sunglasses"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Sunglasses'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span>(4.9)</span>
+              </div>
+              <h3 class="product-title">Sunglasses</h3>
+              <p class="product-desc">Handcrafted Italian acetate frames with UV400 polarized lenses.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹1,799</span>
+                <span class="price-original">₹2,499</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+
+          <!-- Product 8: Perfume -->
+          <article class="product-card" data-category="women">
+            <div class="product-media">
+              <span class="product-badge">20% Off</span>
+              <input type="checkbox" id="wish-8" class="sr-checkbox wish-input" />
+              <label for="wish-8" class="wishlist-toggle" title="Add to Wishlist">
+                <i class="fa-regular fa-heart"></i>
+              </label>
+              <img
+                src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80"
+                alt="Signature Perfume"
+                onerror="this.src='https://placehold.co/500x550/F2EBE1/6D1429?text=Velvet+Perfume'"
+              />
+              <div class="quick-view-overlay">
+                <a href="#cart" class="quick-view-btn">Quick View</a>
+              </div>
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span>(4.8)</span>
+              </div>
+              <h3 class="product-title">Velvet Rose Eau de Parfum</h3>
+              <p class="product-desc">Warm notes of Damask rose, saffron, amberwood &amp; Madagascar vanilla.</p>
+              <div class="product-price-row">
+                <span class="price-current">₹2,199</span>
+                <span class="price-original">₹2,799</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         6. SPECIAL OFFERS / DEALS OF THE DAY SECTION
+         ======================================================================== -->
+    <section id="offers" class="section-padding">
+      <div class="container">
+        <div class="deals-header-bar">
+          <div>
+            <span class="section-eyebrow">Exclusive Privilege</span>
+            <h2 class="section-title" style="margin-bottom: 0;">Deals of the Day</h2>
+          </div>
+
+          <!-- CSS-Only Countdown Display -->
+          <div class="countdown-box" aria-label="Sale Ends In">
+            <span class="countdown-label"><i class="fa-regular fa-clock"></i> Sale Ends In</span>
+            <div class="timer-digits">
+              <span class="time-unit">08h</span>
+              <span class="time-unit">42m</span>
+              <span class="time-unit">19s</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="deals-grid">
+          <!-- Offer 1 -->
+          <div class="deal-card deal-burgundy">
+            <div>
+              <span class="deal-tag">Footwear Flash Sale</span>
+              <h3>Flat 40% Off on Footwear</h3>
+              <p>Step into luxury with handcrafted leather loafers, Chelsea boots, and performance sneakers.</p>
+            </div>
+            <div class="deal-footer">
+              <a href="#featured" class="btn btn-cream">Grab the Deal</a>
+              <span class="urgency-note"><i class="fa-solid fa-bolt"></i> Offer ends soon</span>
+            </div>
+          </div>
+
+          <!-- Offer 2 -->
+          <div class="deal-card deal-cream">
+            <div>
+              <span class="deal-tag" style="background: var(--burgundy-primary); color: var(--cream-bg);">Wardrobe Bundle</span>
+              <h3>Buy 2 Get 1 Free on T-Shirts</h3>
+              <p>Mix and match across our Supima cotton crewnecks and polo essentials in 14 rich shades.</p>
+            </div>
+            <div class="deal-footer">
+              <a href="#featured" class="btn btn-primary">Grab the Deal</a>
+              <span class="urgency-note" style="color: var(--burgundy-primary);"><i class="fa-solid fa-bolt"></i> Offer ends soon</span>
+            </div>
+          </div>
+
+          <!-- Offer 3 -->
+          <div class="deal-card deal-gold-dark">
+            <div>
+              <span class="deal-tag">Signature Combo</span>
+              <h3>Fashion Combo – Bag + Watch + Sunglasses for ₹1,499</h3>
+              <p>Complete your signature daytime look with our three most-loved coordinated accessories.</p>
+            </div>
+            <div class="deal-footer">
+              <a href="#featured" class="btn btn-cream">Grab the Deal</a>
+              <span class="urgency-note"><i class="fa-solid fa-bolt"></i> Offer ends soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         7. NEW ARRIVALS SECTION (HORIZONTAL SCROLL DESKTOP / GRID MOBILE)
+         ======================================================================== -->
+    <section id="new-arrivals" class="section-padding new-arrivals-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Just Landed</span>
+          <h2 class="section-title">New Arrivals</h2>
+          <p class="section-subtitle">
+            Freshly unveiled pieces crafted for the new season. Swipe or scroll horizontally to explore.
+          </p>
+        </div>
+
+        <div class="arrivals-track">
+          <!-- Arrival 1 -->
+          <article class="arrival-card">
+            <div class="arrival-media">
+              <span class="product-badge badge-gold">New</span>
+              <img
+                src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80"
+                alt="Burgundy Wool Blend Overcoat"
+                onerror="this.src='https://placehold.co/500x500/6D1429/FAF6F0?text=Wool+Overcoat'"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span>(5.0)</span>
+              </div>
+              <h3 class="product-title">Burgundy Wool Overcoat</h3>
+              <div class="product-price-row">
+                <span class="price-current">₹5,499</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">Add to Cart</a>
+            </div>
+          </article>
+
+          <!-- Arrival 2 -->
+          <article class="arrival-card">
+            <div class="arrival-media">
+              <span class="product-badge badge-gold">New</span>
+              <img
+                src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80"
+                alt="Cream Silk Satin Midi Dress"
+                onerror="this.src='https://placehold.co/500x500/6D1429/FAF6F0?text=Silk+Midi+Dress'"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span>(4.9)</span>
+              </div>
+              <h3 class="product-title">Cream Silk Satin Midi Dress</h3>
+              <div class="product-price-row">
+                <span class="price-current">₹3,899</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">Add to Cart</a>
+            </div>
+          </article>
+
+          <!-- Arrival 3 -->
+          <article class="arrival-card">
+            <div class="arrival-media">
+              <span class="product-badge badge-gold">New</span>
+              <img
+                src="https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?auto=format&fit=crop&w=600&q=80"
+                alt="Handcrafted Suede Penny Loafers"
+                onerror="this.src='https://placehold.co/500x500/6D1429/FAF6F0?text=Suede+Loafers'"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span>(4.9)</span>
+              </div>
+              <h3 class="product-title">Suede Penny Loafers</h3>
+              <div class="product-price-row">
+                <span class="price-current">₹3,599</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">Add to Cart</a>
+            </div>
+          </article>
+
+          <!-- Arrival 4 -->
+          <article class="arrival-card">
+            <div class="arrival-media">
+              <span class="product-badge badge-gold">New</span>
+              <img
+                src="https://images.unsplash.com/photo-1622434641406-a158123450f9?auto=format&fit=crop&w=600&q=80"
+                alt="Heritage Chronograph Watch"
+                onerror="this.src='https://placehold.co/500x500/6D1429/FAF6F0?text=Chronograph+Watch'"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                <span>(4.8)</span>
+              </div>
+              <h3 class="product-title">Heritage Chronograph Watch</h3>
+              <div class="product-price-row">
+                <span class="price-current">₹6,299</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">Add to Cart</a>
+            </div>
+          </article>
+
+          <!-- Arrival 5 -->
+          <article class="arrival-card">
+            <div class="arrival-media">
+              <span class="product-badge badge-gold">New</span>
+              <img
+                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80"
+                alt="Artisan Leather Weekender"
+                onerror="this.src='https://placehold.co/500x500/6D1429/FAF6F0?text=Leather+Weekender'"
+              />
+            </div>
+            <div class="product-body">
+              <div class="product-rating">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <span>(5.0)</span>
+              </div>
+              <h3 class="product-title">Artisan Leather Weekender</h3>
+              <div class="product-price-row">
+                <span class="price-current">₹5,799</span>
+              </div>
+              <a href="#cart" class="btn btn-primary btn-add-cart">Add to Cart</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         8. WHY SHOP WITH STYLENEST (4 BENEFIT CARDS)
+         ======================================================================== -->
+    <section class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">The StyleNest Promise</span>
+          <h2 class="section-title">Why Shop With StyleNest?</h2>
+          <p class="section-subtitle">
+            Every detail of your shopping experience is engineered for trust, speed, and refined quality.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h3>Free and Fast Delivery</h3>
+            <p>Complimentary express doorstep shipping across India on all orders above ₹999.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fa-solid fa-rotate-left"></i>
+            </div>
+            <h3>Easy 7-Day Returns</h3>
+            <p>Hassle-free doorstep pickup and instant exchanges or full refunds within 7 days.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>Secure Payments</h3>
+            <p>256-bit SSL encrypted checkout supporting UPI, cards, net banking &amp; COD.</p>
+          </div>
+
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <h3>24/7 Customer Support</h3>
+            <p>Dedicated personal stylists and concierge assistance available around the clock.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         9. CUSTOMER REVIEWS SECTION (4 REVIEW CARDS)
+         ======================================================================== -->
+    <section id="reviews" class="section-padding reviews-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Verified Stories</span>
+          <h2 class="section-title">What Our Customers Say</h2>
+          <p class="section-subtitle">
+            Real feedback from patrons who elevate their everyday style with StyleNest.
+          </p>
+        </div>
+
+        <div class="reviews-grid">
+          <!-- Review 1 -->
+          <article class="review-card">
+            <i class="fa-solid fa-quote-right quote-mark"></i>
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-text">
+                “The Burgundy Leather Handbag arrived in luxury magnetic packaging within 36 hours. The stitching and grain rival designer boutiques twice the price.”
+              </p>
+            </div>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">AR</div>
+              <div class="reviewer-info">
+                <h4>Ananya Rao</h4>
+                <span>Purchased: Leather Handbag</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="review-card">
+            <i class="fa-solid fa-quote-right quote-mark"></i>
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-text">
+                “Ordered the Denim Jacket and Supima Cotton T-Shirts. The fit is tailored yet super breathable. Exchanging a size took literally one click.”
+              </p>
+            </div>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">VK</div>
+              <div class="reviewer-info">
+                <h4>Vikram Kapoor</h4>
+                <span>Purchased: Denim Jacket</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="review-card">
+            <i class="fa-solid fa-quote-right quote-mark"></i>
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+              </div>
+              <p class="review-text">
+                “Velvet Rose Eau de Parfum has incredible longevity—I received compliments at an evening gala six hours after applying it. Truly signature quality.”
+              </p>
+            </div>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">SM</div>
+              <div class="reviewer-info">
+                <h4>Sneha Menon</h4>
+                <span>Purchased: Velvet Rose Perfume</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 4 -->
+          <article class="review-card">
+            <i class="fa-solid fa-quote-right quote-mark"></i>
+            <div>
+              <div class="review-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </div>
+              <p class="review-text">
+                “Customer support helped me pick the right strap for my Smart Watch before dispatch. Thoughtful service and crisp presentation from start to finish.”
+              </p>
+            </div>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">RD</div>
+              <div class="reviewer-info">
+                <h4>Rohan Deshmukh</h4>
+                <span>Purchased: Smart Watch</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         OPTIONAL CREATIVE SECTIONS: GIFT CARD & RECENTLY VIEWED
+         ======================================================================== -->
+    <section class="section-padding">
+      <div class="container">
+        <!-- Digital Gift Card Showcase -->
+        <div class="gift-banner">
+          <div>
+            <span class="deal-tag">Gifting Made Effortless</span>
+            <h3>Gift the Art of Timeless Style</h3>
+            <p>
+              Whether it is a birthday, anniversary, or festive celebration, a StyleNest Digital Gift Card lets them choose their favorite wardrobe treasures.
+            </p>
+            <a href="#cart" class="btn btn-cream">
+              Send a Gift Card <i class="fa-solid fa-gift"></i>
+            </a>
+          </div>
+
+          <div class="virtual-card">
+            <div class="virtual-card-top">
+              <span class="virtual-card-brand">
+                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="2.5" y="2.5" width="31" height="31" rx="7" stroke="currentColor" stroke-width="1.3"/>
+                  <path d="M12.2 25.5V12.5L23.8 25.5V12.5" stroke="#FAF6F0" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.5 16.5C10.5 13.8 13.8 12.2 18 12.2C22.2 12.2 25.5 13.8 25.5 16.2C25.5 19.5 10.5 18.5 10.5 22.2C10.5 24.6 13.8 26 18 26C22.2 26 25.5 24.4 25.5 21.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+                StyleNest
+              </span>
+              <span style="font-size: 0.78rem; letter-spacing: 0.14em; opacity: 0.8;">PRIVILEGE CARD</span>
+            </div>
+            <div class="virtual-card-bottom">
+              <div>
+                <span style="font-size: 0.75rem; opacity: 0.75; display: block;">VALID ONLINE &amp; IN-STORE</span>
+                <strong style="font-size: 1.35rem; color: #F3D382;">₹2,500 &mdash; ₹25,000</strong>
+              </div>
+              <i class="fa-solid fa-wifi" style="transform: rotate(90deg); opacity: 0.7;"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recently Viewed Strip -->
+        <h3 style="font-family: var(--font-heading); font-size: 1.55rem; margin-bottom: 1.25rem;">
+          Recently Viewed
+        </h3>
+        <div class="recently-viewed-grid">
+          <a href="#featured" class="recent-item">
+            <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=200&q=80" alt="Denim Jacket" />
+            <div>
+              <h5>Denim Jacket</h5>
+              <span>₹2,999</span>
+            </div>
+          </a>
+          <a href="#featured" class="recent-item">
+            <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=200&q=80" alt="Leather Handbag" />
+            <div>
+              <h5>Leather Handbag</h5>
+              <span>₹4,499</span>
+            </div>
+          </a>
+          <a href="#featured" class="recent-item">
+            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=200&q=80" alt="Sunglasses" />
+            <div>
+              <h5>Polarized Sunglasses</h5>
+              <span>₹1,799</span>
+            </div>
+          </a>
+          <a href="#featured" class="recent-item">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=200&q=80" alt="Perfume" />
+            <div>
+              <h5>Velvet Rose Perfume</h5>
+              <span>₹2,199</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         11. SHOPPING CART PREVIEW SECTION (WITH FREE SHIPPING PROGRESS BAR)
+         ======================================================================== -->
+    <section id="cart" class="section-padding cart-section">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 2.25rem;">
+          <span class="section-eyebrow">Bag Summary</span>
+          <h2 class="section-title">Your Cart</h2>
+          <p class="section-subtitle">
+            Review your curated items before proceeding to our secure express checkout.
+          </p>
+        </div>
+
+        <!-- Free Shipping Progress Bar -->
+        <div class="shipping-progress-card">
+          <div class="shipping-progress-text">
+            <span><i class="fa-solid fa-circle-check" style="color: #1E7E34;"></i> Congratulations! You’ve unlocked <strong>FREE Express Shipping</strong> (Orders above ₹999).</span>
+            <span>100% Unlocked</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="cart-layout">
+          <!-- Cart Items List -->
+          <div class="cart-items-box">
+            <!-- Cart Item 1 -->
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <img
+                  src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=250&q=80"
+                  alt="Leather Handbag"
+                />
+                <div>
+                  <h4 class="cart-item-title">Leather Handbag</h4>
+                  <p class="cart-item-variant">Color: Deep Burgundy &bull; Size: Standard</p>
+                </div>
+              </div>
+
+              <div class="qty-selector" aria-label="Quantity selector">
+                <span class="qty-btn">&minus;</span>
+                <span class="qty-val">1</span>
+                <span class="qty-btn">+</span>
+              </div>
+
+              <div class="cart-item-price">₹4,499</div>
+              <a href="#cart" class="remove-btn" title="Remove item" aria-label="Remove Leather Handbag">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </div>
+
+            <!-- Cart Item 2 -->
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <img
+                  src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=250&q=80"
+                  alt="Denim Jacket"
+                />
+                <div>
+                  <h4 class="cart-item-title">Denim Jacket</h4>
+                  <p class="cart-item-variant">Color: Indigo Wash &bull; Size: L</p>
+                </div>
+              </div>
+
+              <div class="qty-selector" aria-label="Quantity selector">
+                <span class="qty-btn">&minus;</span>
+                <span class="qty-val">1</span>
+                <span class="qty-btn">+</span>
+              </div>
+
+              <div class="cart-item-price">₹2,999</div>
+              <a href="#cart" class="remove-btn" title="Remove item" aria-label="Remove Denim Jacket">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </div>
+
+            <!-- Cart Item 3 -->
+            <div class="cart-item">
+              <div class="cart-item-info">
+                <img
+                  src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=250&q=80"
+                  alt="Polarized Sunglasses"
+                />
+                <div>
+                  <h4 class="cart-item-title">Polarized Sunglasses</h4>
+                  <p class="cart-item-variant">Frame: Tortoiseshell Gold &bull; One Size</p>
+                </div>
+              </div>
+
+              <div class="qty-selector" aria-label="Quantity selector">
+                <span class="qty-btn">&minus;</span>
+                <span class="qty-val">1</span>
+                <span class="qty-btn">+</span>
+              </div>
+
+              <div class="cart-item-price">₹1,799</div>
+              <a href="#cart" class="remove-btn" title="Remove item" aria-label="Remove Polarized Sunglasses">
+                <i class="fa-solid fa-trash-can"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Order Summary Card -->
+          <aside class="cart-summary-box">
+            <h3>Order Summary</h3>
+
+            <div class="summary-row">
+              <span>Subtotal (3 items)</span>
+              <span>₹9,297</span>
+            </div>
+            <div class="summary-row">
+              <span>Express Delivery</span>
+              <span style="color: #1E7E34; font-weight: 600;">FREE</span>
+            </div>
+            <div class="summary-row discount">
+              <span>Promo Discount (STYLE10)</span>
+              <span>&minus; ₹930</span>
+            </div>
+
+            <div class="summary-total">
+              <span>Total Payable</span>
+              <span>₹8,367</span>
+            </div>
+
+            <div class="cart-actions">
+              <a href="#checkout-confirm" class="btn btn-primary">
+                Proceed to Checkout <i class="fa-solid fa-lock"></i>
+              </a>
+              <a href="#featured" class="btn btn-outline">
+                Continue Shopping
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         10. NEWSLETTER / SHOPPING UPDATE SECTION
+         ======================================================================== -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-box">
+          <span class="deal-tag">VIP Inner Circle</span>
+          <h2>Join the StyleNest Family</h2>
+          <p>
+            Subscribe for private previews of limited capsule drops, seasonal lookbooks, and members-only privileges delivered straight to your inbox.
+          </p>
+
+          <form class="newsletter-form" action="#top">
+            <input type="email" placeholder="Enter your email address..." required aria-label="Email address" />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+
+          <span class="newsletter-note">
+            <i class="fa-solid fa-sparkles"></i> Get 10% off on your first order.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         12. CONTACT / FOOTER SECTION
+         ======================================================================== -->
+    <footer id="contact" class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Column 1: Brand & Socials -->
+          <div>
+            <a href="#top" class="footer-brand" aria-label="StyleNest Home">
+              <span class="brand-emblem">
+                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect x="2.5" y="2.5" width="31" height="31" rx="7" stroke="currentColor" stroke-width="1.2" stroke-opacity="0.55"/>
+                  <path d="M18 5.5L20.5 8L18 10.5L15.5 8L18 5.5Z" fill="currentColor"/>
+                  <path d="M12.2 25.5V12.5L23.8 25.5V12.5" stroke="#FAF6F0" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.5 16.5C10.5 13.8 13.8 12.2 18 12.2C22.2 12.2 25.5 13.8 25.5 16.2C25.5 19.5 10.5 18.5 10.5 22.2C10.5 24.6 13.8 26 18 26C22.2 26 25.5 24.4 25.5 21.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span class="brand-wordmark">
+                <span class="brand-name">Style<em>Nest</em></span>
+                <span class="brand-tagline">Atelier &amp; Living</span>
+              </span>
+            </a>
+            <p class="footer-about">
+              Destination for refined fashion, handcrafted leather goods, and modern lifestyle essentials designed in signature burgundy and warm cream aesthetics.
+            </p>
+            <div class="social-links" aria-label="Social media links">
+              <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              <a href="https://facebook.com" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="https://x.com" target="_blank" rel="noopener" class="social-link" aria-label="Twitter X"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="https://youtube.com" target="_blank" rel="noopener" class="social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              <a href="https://whatsapp.com" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <!-- Column 2: Quick Links -->
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-links">
+              <li><a href="#top">Home</a></li>
+              <li><a href="#featured">Shop All</a></li>
+              <li><a href="#categories">Categories</a></li>
+              <li><a href="#offers">Deals of the Day</a></li>
+              <li><a href="#new-arrivals">New Arrivals</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Customer Support -->
+          <div class="footer-col">
+            <h4>Customer Care</h4>
+            <ul class="footer-links">
+              <li><a href="#cart">Track Your Order</a></li>
+              <li><a href="#reviews">7-Day Returns &amp; Exchange</a></li>
+              <li><a href="#offers">Shipping Policy</a></li>
+              <li><a href="#contact">Size &amp; Fit Guide</a></li>
+              <li><a href="#contact">Privacy &amp; Terms</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Contact Details -->
+          <div class="footer-col">
+            <h4>Contact Us</h4>
+            <ul class="contact-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Level 4, Heritage Flagship Arcade, Banjara Hills, Hyderabad 500034</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span>+91 (800) 419-7890</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-envelope"></i>
+                <span>concierge@stylenest.in</span>
+              </li>
+              <li>
+                <i class="fa-regular fa-clock"></i>
+                <span>Mon &ndash; Sun: 9:00 AM &ndash; 10:00 PM IST</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="footer-bottom">
+          <p>&copy; 2026 StyleNest Luxury Retail Pvt. Ltd. All rights reserved.</p>
+          <a href="#top" class="back-to-top">
+            Back to Top <i class="fa-solid fa-arrow-up"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Optional Mobile Sticky Quick-Cart Bar -->
+    <div class="mobile-sticky-bar">
+      <div>
+        <span style="font-size: 0.75rem; opacity: 0.8; display: block;">3 Items in Bag</span>
+        <strong style="font-size: 1rem; color: #F3D382;">₹8,367</strong>
+      </div>
+      <a href="#cart" class="btn btn-cream" style="padding: 0.55rem 1.25rem; font-size: 0.85rem;">
+        View Cart &amp; Checkout
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>
